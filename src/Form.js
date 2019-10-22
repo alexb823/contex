@@ -14,11 +14,23 @@ class Form extends Component {
       <LockOutlinedIcon />
       </Avatar>
       <Typography variant="h5">Sign In</Typography>
-      <Select>
-      <MenuItem>English</MenuItem>
-      <MenuItem>French</MenuItem>
-      <MenuItem>Spanish</MenuItem>
+      <Select value="english">
+      <MenuItem value="english">English</MenuItem>
+      <MenuItem value="french">French</MenuItem>
+      <MenuItem value="spanish">Spanish</MenuItem>
       </Select>
+      <form className={classes.form}>
+        <FormControl margin="normal" required fullWidth>
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <Input id="email" name="email" autoFocus></Input>
+        </FormControl>
+        <FormControl margin="normal" required fullWidth>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input id="password" name="password"></Input>
+        </FormControl>
+        <FormControlLabel control={<Checkbox color="primary"/>} lable="Remember Me" />
+        <Button variant="contained" type="submit" fullWidth color="primary" className="submit">Sign In</Button>
+      </form>
       </Paper>
       </main>
     )
