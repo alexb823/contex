@@ -6,14 +6,18 @@ import {
   Typography,
   InputBase,
   Switch,
-} from '@material-ui/core';
+}
+from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon } from '@material-ui/icons';
 import styles from './styles/NavBarStyles';
+import { ThemeContext } from './contexts/ThemeContext';
 
 class Navbar extends Component {
+  static contextType = ThemeContext;
   render() {
-    const {classes} = this.props;
+    console.log(this.context);
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="primary">
