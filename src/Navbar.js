@@ -16,11 +16,11 @@ import { ThemeContext } from './contexts/ThemeContext';
 class Navbar extends Component {
   static contextType = ThemeContext;
   render() {
-    console.log(this.context);
+    const { isDarkMode, toggleTheme } = this.context;
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color={isDarkMode ? "default" : "primary"}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit">
               <span role="img">🇫🇷</span>
@@ -28,7 +28,7 @@ class Navbar extends Component {
             <Typography className={classes.title} variant="h6" color="inherit">
               App Title
             </Typography>
-            <Switch />
+            <Switch onChange={toggleTheme}/>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
