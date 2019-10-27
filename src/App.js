@@ -14,8 +14,8 @@ function App() {
           <Form />
         </PageContent>
       </LanguageProvider>
-      </ThemeProvider>
-  )
+    </ThemeProvider>
+  );
 }
 
 export default App;

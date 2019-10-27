@@ -6,11 +6,11 @@ class PageContent extends Component {
   render() {
     const { isDarkMode } = this.context;
     const styles = {
-      backgroundColor: isDarkMode ? "white" : "black",
-      height: "100vh",
-      width: "100vw",
-    }
-    return <div style={styles}>{this.props.children}</div>
+      backgroundColor: isDarkMode ? 'white' : 'black',
+      height: '100vh',
+      width: '100vw',
+    };
+    return <div style={styles}>{this.props.children}</div>;
   }
 }
 
