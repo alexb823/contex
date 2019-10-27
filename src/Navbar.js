@@ -6,38 +6,62 @@ import {
   Typography,
   InputBase,
   Switch,
-}
-from '@material-ui/core';
+} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon } from '@material-ui/icons';
 import styles from './styles/NavBarStyles';
 import { ThemeContext } from './contexts/ThemeContext';
+import { withLanguageContext } from './contexts/LanguageContext';
+
+const content = {
+  english: {
+    search: 'Search',
+    flag: '🇺🇸',
+  },
+  french: {
+    search: 'Chercher',
+    flag: '🇫🇷',
+  },
+  spanish: {
+    search: 'Buscar',
+    flag: '🇪🇸',
+  },
+};
 
 class Navbar extends Component {
   static contextType = ThemeContext;
   render() {
     const { isDarkMode, toggleTheme } = this.context;
-    const { classes } = this.props;
+    const {
+      classes,
+      languageContext: { language },
+    } = this.props;
+    const { search, flag } = content[language];
     return (
       <div className={classes.root}>
-        <AppBar position="static" color={isDarkMode ? "default" : "primary"}>
+        <AppBar position="static" color={isDarkMode ? 'default' : 'primary'}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit">
-              <span role="img">🇫🇷</span>
+              <span role="img" aria-label="flag">
+                {flag}
+              </span>
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit">
               App Title
             </Typography>
-            <Switch onChange={toggleTheme}/>
+            <Switch onChange={toggleTheme} />
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase placeholder="Search..." classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }} />
+              <InputBase
+                placeholder={`${search}...`}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
             </div>
           </Toolbar>
         </AppBar>
@@ -46,4 +70,4 @@ class Navbar extends Component {
   }
 }
 
-export default withStyles(styles)(Navbar);
+export default withLanguageContext(withStyles(styles)(Navbar));
