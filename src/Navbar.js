@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -6,12 +6,13 @@ import {
   Typography,
   InputBase,
   Switch,
-} from '@material-ui/core';
+}
+from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon } from '@material-ui/icons';
 import styles from './styles/NavBarStyles';
 import { ThemeContext } from './contexts/ThemeContext';
-import { withLanguageContext } from './contexts/LanguageContext';
+import { LanguageContext } from './contexts/LanguageContext';
 
 const content = {
   english: {
@@ -28,17 +29,14 @@ const content = {
   },
 };
 
-class Navbar extends Component {
-  static contextType = ThemeContext;
-  render() {
-    const { isDarkMode, toggleTheme } = this.context;
-    const {
-      classes,
-      languageContext: { language },
-    } = this.props;
-    const { search, flag } = content[language];
-    return (
-      <div className={classes.root}>
+const Navbar = props => {
+
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const { classes } = props;
+  const { search, flag } = content[language];
+  return (
+    <div className={classes.root}>
         <AppBar position="static" color={isDarkMode ? 'default' : 'primary'}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit">
@@ -66,8 +64,7 @@ class Navbar extends Component {
           </Toolbar>
         </AppBar>
       </div>
-    );
-  }
+  );
 }
 
-export default withLanguageContext(withStyles(styles)(Navbar));
+export default withStyles(styles)(Navbar);
